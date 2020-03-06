@@ -50,7 +50,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 mysqli_stmt_store_result($stmt);
 
 
-                if(mysqli_stmt_num_rows($stmt) == 1) {
+            if(mysqli_stmt_num_rows($stmt) == 1) {
 
                     mysqli_stmt_bind_result($stmt, $id, $username, $hashed_password);
                 if(mysqli_stmt_fetch($stmt)) {

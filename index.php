@@ -86,7 +86,7 @@ if (empty($username_err) && empty($password_err) && empty($confirm_password_err)
 
 
 
-    }
+}
 ?>
 
 <!DOCTYPE html>
