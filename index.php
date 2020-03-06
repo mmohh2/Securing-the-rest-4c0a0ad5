@@ -6,16 +6,16 @@ $username = $password = $confirm_password = "";
 $username_err = $password_err = $confirm_password_err = "";
 
 
-if($_SERVER["REQUEST_METHOD"] == "POST"){
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
-    if(empty(trim($_POST["username"]))){
+    if (empty(trim($_POST["username"]))) {
         $username_err = "Vul een gebruikersnaam in.";
     } else{
 
         $sql = "SELECT id FROM users WHERE username = ?";
 
-        if($stmt = mysqli_prepare($link, $sql)){
+        if ($stmt = mysqli_prepare($link, $sql)) {
 
             mysqli_stmt_bind_param($stmt, "s", $param_username);
 
@@ -23,11 +23,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $param_username = trim($_POST["username"]);
 
 
-            if(mysqli_stmt_execute($stmt)){
+            if (mysqli_stmt_execute($stmt)) {
 
                 mysqli_stmt_store_result($stmt);
 
-                if(mysqli_stmt_num_rows($stmt) == 1){
+                if (mysqli_stmt_num_rows($stmt) == 1) {
                     $username_err = "Deze gebruikersnaam bestaat al.";
                 } else{
                     $username = trim($_POST["username"]);
@@ -42,31 +42,31 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
 
 
-    if(empty(trim($_POST["password"]))){
+    if (empty(trim($_POST["password"]))) {
         $password_err = "Vul aub een wachtwoord in.";
-    } elseif(strlen(trim($_POST["password"])) < 6){
+    } elseif(strlen(trim($_POST["password"])) < 6) {
         $password_err = "Jouw wachtwoord heeft minimaal 6 letters nodig.";
     } else{
         $password = trim($_POST["password"]);
     }
 
 
-    if(empty(trim($_POST["confirm_password"]))){
+    if (empty(trim($_POST["confirm_password"]))) {
         $confirm_password_err = "Bevestig aub jouw wachtwoord";
     } else{
         $confirm_password = trim($_POST["confirm_password"]);
-        if(empty($password_err) && ($password != $confirm_password)){
+        if (empty($password_err) && ($password != $confirm_password)) {
             $confirm_password_err = "Je hebt niet dezelfde wachtwoord gebruikt.";
         }
     }
 
 
-    if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
+    if (empty($username_err) && empty($password_err) && empty($confirm_password_err)) {
 
 
         $sql = "INSERT INTO users (username, password) VALUES (?, ?)";
 
-        if($stmt = mysqli_prepare($link, $sql)){
+        if ($stmt = mysqli_prepare($link, $sql)) {
 
             mysqli_stmt_bind_param($stmt, "ss", $param_username, $param_password);
 
@@ -75,7 +75,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $param_password = password_hash($password, PASSWORD_DEFAULT);
 
 
-            if(mysqli_stmt_execute($stmt)){
+            if (mysqli_stmt_execute($stmt)) {
 
                 header("location: login.php");
             } else{
