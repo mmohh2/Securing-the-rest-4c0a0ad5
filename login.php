@@ -37,7 +37,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $sql = "SELECT id, username, password FROM users WHERE username = ?";
 
-        if ($stmt = mysqli_prepare($link, $sql)) {
+
 
             mysqli_stmt_bind_param($stmt, "s", $param_username);
 
@@ -81,10 +81,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
             mysqli_stmt_close($stmt);
         }
-    }
 
 
-    mysqli_close($link);
+
+
 }
 ?>
 

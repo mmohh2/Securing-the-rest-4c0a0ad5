@@ -15,7 +15,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $sql = "SELECT id FROM users WHERE username = ?";
 
-        if ($stmt = mysqli_prepare($link, $sql)) {
 
             mysqli_stmt_bind_param($stmt, "s", $param_username);
 
@@ -66,7 +65,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $sql = "INSERT INTO users (username, password) VALUES (?, ?)";
 
-        if ($stmt = mysqli_prepare($link, $sql)) {
 
             mysqli_stmt_bind_param($stmt, "ss", $param_username, $param_password);
 
@@ -84,11 +82,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
             mysqli_stmt_close($stmt);
-        }
-    }
 
 
-    mysqli_close($link);
+
+
 }
 ?>
 
